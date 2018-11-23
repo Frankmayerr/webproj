@@ -1,13 +1,15 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import * as $ from 'jquery';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
-import { PaymentComponent } from './payment/payment.component';
-import { CardComponent } from './payment/card/card.component';
-import { BankComponent } from './payment/bank/bank.component';
-import { PaymentRequestComponent } from './payment-request/payment-request.component';
+import { PaymentComponent } from './content/payment/payment.component';
+import { CardComponent } from './content/payment/card/card.component';
+import { BankComponent } from './content/payment/bank/bank.component';
+import { PaymentRequestComponent } from './content/payment-request/payment-request.component';
+import { ContentComponent } from './content/content.component';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,8 @@ import { PaymentRequestComponent } from './payment-request/payment-request.compo
     PaymentComponent,
     CardComponent,
     BankComponent,
-    PaymentRequestComponent
+    PaymentRequestComponent,
+    ContentComponent
   ],
   imports: [
     BrowserModule,

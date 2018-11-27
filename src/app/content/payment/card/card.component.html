@@ -10,26 +10,30 @@
         <form>
             <div class="form-group cvv">
                 <label for="cvv">CVV</label>
-                <input type="number" class="form-control" id="cvv" placeholder="000" reqiured [(ngModel)]="cvvNumber" [ngModelOptions]={standalone:true}>
+                <input type="number" class="form-control" id="cvv" placeholder="3 digits" reqiured [(ngModel)]="cvvNumber" [ngModelOptions]={standalone:true}>
             </div>
-            <div class="form-group cardNumber" id="card-number">
+            <div class="form-group cardNumber">
                 <label for="cardNumber">Card Number</label>
-                <input type="number" class="form-control" id="cardNumber" placeholder="0000000000000000" required [(ngModel)]="card" [ngModelOptions]={standalone:true}>
+                <input type="number" class="form-control" id="cardNumber" placeholder="16 digits" required [(ngModel)]="card" [ngModelOptions]={standalone:true}>
             </div>
-            <div class="form-group sum" id="summary">
+            <div class="form-group summary">
                 <label for="summary">Sum to send</label>
-                <input type="number" class="form-control" min=1000 max=75000 id="summary" placeholder="777" required [(ngModel)]="sum" [ngModelOptions]={standalone:true}>
+                <input type="number" class="form-control" id="summary" placeholder="Sum" required [(ngModel)]="summary" [ngModelOptions]={standalone:true}>
             </div>
-            <div class="form-group comment" id="comment">
+            <div class="form-group comment">
                 <label for="comment">Commentary</label>
                 <input type="text" maxlength="150" class="form-control" id="comment" placeholder="Your text" required [(ngModel)]="comment" [ngModelOptions]={standalone:true}>
             </div>
-            <div class="form-group email" id="emaiil">
-                <label for="comment">Email</label>
-                <input type="email" maxlength="150" class="form-control" id="email" required [(ngModel)]="email" [ngModelOptions]={standalone:true}>
+            <div class="form-group email">
+                <label for="email">Email</label>
+                <input type="email" class="form-control" id="email" placeholder="youremail@mail.ru" required [(ngModel)]="email" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group date">
+                <label for="date">Date</label>
+                <input type="month" class="form-control" id="date" required [(ngModel)]="date" [ngModelOptions]={standalone:true}>
             </div>
 
-            <div class="form-group" id="expiration-date">
+            <!-- <div class="form-group" id="expiration-date">
                 <label>Expiration Date  </label>
                 <select>
                   <option value="01">January</option>
@@ -50,14 +54,14 @@
                       {{element.year}}
                   </option>
               </select>
-            </div>
+            </div> -->
             <div class="form-group" id="credit_cards">
                 <img src="assets/images/visa.jpg" id="visa">
                 <img src="assets/images/mastercard.jpg" id="mastercard">
                 <img src="assets/images/amex.jpg" id="amex">
             </div>
             <div class="form-group" id="pay-now">
-                <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
+                <button type="submit" class="btn btn-default" id="confirm-purchase" disabled>Confirm</button>
             </div>
         </form>
     </div>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as $ from 'jquery';
+import { AlertPromise } from 'selenium-webdriver';
 @Component({
   selector: 'app-card',
   templateUrl: './card.component.html',
@@ -7,10 +8,11 @@ import * as $ from 'jquery';
 })
 export class CardComponent implements OnInit {
   card: number;
-  cvvNumber: number;
+  cvvNumber: string;
   years = [];
-  sum: number;
+  summary: number;
   comment: string;
+  valid : boolean;
 
   constructor() { 
     for (var i = 2018; i <= 2035; i++) {
@@ -20,6 +22,7 @@ export class CardComponent implements OnInit {
 
   inputValidation(objName, filterString) {
     var obj = $('#' + objName);
+    var objFormClass = obj.closest('.form-group');
     obj.keypress(function(e) {
       e = e || event;
       var chr = '';
@@ -27,20 +30,13 @@ export class CardComponent implements OnInit {
       else chr = getChar(e);
       if (chr == null) 
         chr='';
-
-      var objFormClass = obj.closest('.form-group');
-      if (filterString(obj.val() + chr)) {
-        obj.removeClass('alert-warning');
-        obj.addClass('alert-success');
-        objFormClass.removeClass('has-error');
-        objFormClass.addClass('has-success');
-      } else {
-        obj.removeClass('alert-success');
-        obj.addClass('alert-warning');
-        objFormClass.removeClass('has-success');
-        objFormClass.addClass('has-error');
-      }
+      var result = check(obj, filterString, chr);
+      if (this.valid && !result)
+        this.valid = false;
+      // return check(obj, filterString, chr);
   });
+  obj.keyup(function(e) {return check(obj, filterString, '');});
+  obj.click(function(e) {return check(obj, filterString, '');});
 
   function getChar(event) {
       if (event.which == null) {
@@ -53,6 +49,22 @@ export class CardComponent implements OnInit {
       }
       return null; // специальная клавиша
   }
+
+  function check(obj, filterString, chr){
+    if (filterString(obj.val() + chr)) {
+      obj.removeClass('alert-warning');
+      obj.addClass('alert-success');
+      objFormClass.removeClass('has-error');
+      objFormClass.addClass('has-success');
+      return 't';
+    }
+    obj.removeClass('alert-success');
+    obj.addClass('alert-warning');
+    objFormClass.removeClass('has-success');
+    objFormClass.addClass('has-error');
+    return 'f';
+  }
+  return 'f';
   }
 
   check_chars(str, filter) {
@@ -62,11 +74,31 @@ export class CardComponent implements OnInit {
     return true;
   }
 
+  validate_all() {
+    var isValidCard = this.inputValidation('cardNumber', (str) => (str.length == 16) && this.check_chars(str, (chr) => (chr >= '0' && chr <= '9')));
+    var isValidCvv = this.inputValidation('cvv', (str) => str.length ==3 && this.check_chars(str, (chr) => (chr >= '0' && chr <= '9')));
+    var isValidSummary = this.inputValidation('summary', (str) => Number(str) >= 1000 && Number(str) <= 75000);
+    var isValidComment = this.inputValidation('comment', (str) => str.length <= 150);
+    var isValidEmail = this.inputValidation('email', (str) => {
+      var re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(str);
+    });
+    this.valid = isValidCard == 't' && isValidComment == 't' && isValidCvv == 't' && isValidEmail == 't' && isValidSummary == 't';
+    this.get_confirm_actual();
+    return;
+  }
+
+  get_confirm_actual()
+  {
+    if (this.valid)
+      $('#confirm-purchase').addClass('disabled')
+    else if ($('#confirm-purchase').hasClass('disabled'))
+      $('#confirm-purchase').removeClass('disabled')
+  }
+
   ngOnInit() {
-    this.inputValidation('cardNumber', (str) => (str.length === 16) && this.check_chars(str, (chr) => (chr >= '0' && chr <= '9')));
-    this.inputValidation('cvv', (str) => str.length === 3 && this.check_chars(str, (chr) => (chr >= '0' && chr <= '9')));
-    this.inputValidation('summary', (str) => Number(str) >= 1000);
-    this.inputValidation('comment', (str) => str.length <= 150);
+    this.validate_all();
+    this.get_confirm_actual();
   }
     // $(document).ready(function() {
     //     var owner = $('#owner');

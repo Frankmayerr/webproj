@@ -7,9 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class PaymentRequestComponent implements OnInit {
 
-  isActual;
   constructor() {
-    this.isActual = false;
    }
 
   ngOnInit() {

@@ -1,3 +1,14 @@
-<div class="col-md-3">
-    payment works!
+<div class="container">
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation"><a href="#card" aria-controls="card" role="tab" data-toggle="tab">Картой банка</a></li>
+        <li role="presentation"><a href="#bank" aria-controls="bank" role="tab" data-toggle="tab">Из своего интернет-банка</a></li>
+    </ul>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane fade in active" id="card">
+            <app-card></app-card>
+        </div>
+        <div role="tabpanel" class="tab-pane fade" id="bank">
+            <app-bank></app-bank>
+        </div>
+    </div>
 </div>

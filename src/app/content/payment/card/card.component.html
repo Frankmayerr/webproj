@@ -1,3 +1,110 @@
-<p>
-  card works!
-</p>
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script src="assets/js/jquery.payform.min.js" charset="utf-8"></script>
+<script src="assets/js/script.js"></script> -->
+
+<div class="creditCardForm">
+    <div class="heading">
+        <h1>Confirm Purchase</h1>
+    </div>
+    <div class="payment">
+        <form>
+            <div class="form-group cvv">
+                <label for="cvv">CVV</label>
+                <input type="number" class="form-control" id="cvv" placeholder="000" reqiured [(ngModel)]="cvvNumber" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group cardNumber" id="card-number">
+                <label for="cardNumber">Card Number</label>
+                <input type="number" class="form-control" id="cardNumber" placeholder="0000000000000000" required [(ngModel)]="card" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group sum" id="summary">
+                <label for="summary">Sum to send</label>
+                <input type="number" class="form-control" min=1000 max=75000 id="summary" placeholder="777" required [(ngModel)]="sum" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group comment" id="comment">
+                <label for="comment">Commentary</label>
+                <input type="text" maxlength="150" class="form-control" id="comment" placeholder="Your text" required [(ngModel)]="comment" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group email" id="emaiil">
+                <label for="comment">Email</label>
+                <input type="email" maxlength="150" class="form-control" id="email" required [(ngModel)]="email" [ngModelOptions]={standalone:true}>
+            </div>
+
+            <div class="form-group" id="expiration-date">
+                <label>Expiration Date  </label>
+                <select>
+                  <option value="01">January</option>
+                  <option value="02">February </option>
+                  <option value="03">March</option>
+                  <option value="04">April</option>
+                  <option value="05">May</option>
+                  <option value="06">June</option>
+                  <option value="07">July</option>
+                  <option value="08">August</option>
+                  <option value="09">September</option>
+                  <option value="10">October</option>
+                  <option value="11">November</option>
+                  <option value="12">December</option>
+              </select>
+                <select onmousedown="if(this.options.length>8){this.size=8;}" onchange='this.size=0;' onblur="this.size=0;">
+                  <option *ngFor="let element of years" value=element> 
+                      {{element.year}}
+                  </option>
+              </select>
+            </div>
+            <div class="form-group" id="credit_cards">
+                <img src="assets/images/visa.jpg" id="visa">
+                <img src="assets/images/mastercard.jpg" id="mastercard">
+                <img src="assets/images/amex.jpg" id="amex">
+            </div>
+            <div class="form-group" id="pay-now">
+                <button type="submit" class="btn btn-default" id="confirm-purchase">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- <form>
+    <div class="form-group">
+        <label for="exampleInputEmail1">Номер карты</label>
+        <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+    </div>
+    <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+    </div>
+    <div class="form-check">
+        <input type="checkbox" class="form-check-input" id="exampleCheck1">
+        <label class="form-check-label" for="exampleCheck1">Check me out</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+Номер карты
+мм.гг
+свс
+сумма
+комментарий
+электронная почта
+кнопка заплатить
+
+из банка:
+от кого (инн или название плательщика)
+бик
+номер счета 
+за что (три подкнопки: ндс 18%, 10%, без НДС)
+сколько
+кнопка получить файл для интернет-банка
+очистить форму
+
+запросить платёж:
+инн получателя
+бик 
+номер счета
+за что
+сколько
+номер телефона
+эл почта
+создать платеж
+очистить форму -->

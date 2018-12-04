@@ -1,3 +1,35 @@
-<p>
-  bank works!
-</p>
+<div class="creditCardForm">
+    <div class="heading">
+        <h1>Confirm Purchase</h1>
+    </div>
+    <div class="payment">
+        <form>
+            <div class="form-group sender">
+                <label for="sender">От кого</label>
+                <input type="number" class="form-control" id="sender" placeholder="ИНН (10 или 12 цифр)" reqiured [(ngModel)]="sender" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group bik">
+                <label for="bik">БИК</label>
+                <input type="number" class="form-control" id="bik" placeholder="9 цифр" required [(ngModel)]="bik" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group reason">
+                <p>За что:</p>
+                <input type="radio" name="VAT" value="НДС 18%" checked> НДС 18%
+                <input type="radio" name="VAT" value="НДС 10%"> НДС 10%
+                <input type="radio" name="VAT" value="Без НДС"> Без НДС<br><br>
+            </div>
+            <div class="form-group money">
+                <label for="bik">Сколько</label>
+                <input type="number" class="form-control" id="money" placeholder="от 1000 до 75000" required [(ngModel)]="money" [ngModelOptions]={standalone:true}>
+            </div>
+            <div class="form-group" id="credit_cards">
+                <img src="assets/images/visa.jpg" id="visa">
+                <img src="assets/images/mastercard.jpg" id="mastercard">
+                <img src="assets/images/amex.jpg" id="amex">
+            </div>
+            <div class="form-group" id="pay-now">
+                <button type="submit" class="btn btn-default disabled" id="confirm-purchase">Confirm</button>
+            </div>
+        </form>
+    </div>
+</div>

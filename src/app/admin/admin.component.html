@@ -7,15 +7,22 @@
     <div class="tab-content">
         <div class="tab-pane active" id="a">
             <table>
-                <tr>
-                    <td>Номер карты</td>
-                    <td>CVV</td>
-                    <td>ММ\ГГ</td>
-                    <td>Сумма</td>
-                    <td>Email</td>
-                    <td>Комментарий</td>
-                    <td>Безопасность платежа</td>
-                </tr>
+                <div *ngIf="Cards !== undefined && Cards.length>0; then thenBlock else elseBlock"></div>
+                <ng-template #thenBlock>
+                    <tr>
+                        <td>Номер карты</td>
+                        <td>CVV</td>
+                        <td>ММ\ГГ</td>
+                        <td>Сумма</td>
+                        <td>Email</td>
+                        <td>Комментарий</td>
+                        <td>Безопасность платежа</td>
+                    </tr>
+                </ng-template>
+                <ng-template #elseBlock>
+                    <img src="https://memepedia.ru/wp-content/uploads/2018/10/pikachu-mem-hd.jpg" width="500px" height="500px">
+                </ng-template>
+
                 <tr *ngFor="let card of Cards;" [ngStyle]="{'background-color': card.IsSecure == 'false' ? 'rgb(255, 255, 255)' : 'rgb(248, 122, 122)' }">
                     <td *ngFor="let c of card.Props;">{{c}}</td>
                     <td><button type="button" (click)="changecardinfo(card)" class="btn btn-primary btn-sm">Изменить безопасность платежа</button></td>
@@ -25,12 +32,12 @@
         <div class="tab-pane" id="b">
             <table>
                 <tr>
-                    <td>ИНН</td>
                     <td>БИК</td>
-                    <td>Номер счета</td>
-                    <td>За что</td>
+                    <td>ИНН</td>
                     <td>Сколько</td>
+                    <td>Номер счета</td>
                     <td>Номер телефона</td>
+                    <td>За что</td>
                 </tr>
                 <tr *ngFor="let cells of Requests;">
                     <td *ngFor="let c of cells;">{{c}}</td>

@@ -1,33 +1,31 @@
-<header class="header">
-    <div class="user-info">
-        <div class="user-info__text">
-            <div class="user-info__title">
-                <span>{{ userCompany }} </span>
-                <span>{{ userName }}</span>
+<div class="user-info">
+    <div class="user-info__text">
+        <div class="user-info__title">
+            <span>{{ userCompany }} </span>
+            <span>{{ userName }}</span>
+        </div>
+        <div class="user-info__item">
+            <div class="user-info__phone">{{ userPhone }}</div>
+            <div class="user-info__site">
+                <a href="#" class="link link_blue_yes">{{ userSite }}</a>
             </div>
-            <div class="user-info__item">
-                <div class="user-info__phone">{{ userPhone }}</div>
-                <div class="user-info__site">
-                    <a href="#" class="link link_blue_yes">{{ userSite }}</a>
-                </div>
-                <div class="user-info__email">
-                    <a href="#" class="link link_blue_yes">{{ userEmail }}</a>
-                </div>
-            </div>
-            <div class="user-info__item">
-                <div class="user-info__company-info">
-                    <a href="#" class="link link_blue_yes">Информация о компании</a>
-                </div>
-            </div>
-            <div class="user-info__item">
-                <div class="user-info__requisites">
-                    <a href="#" class="link link_blue_yes">Показать реквизиты</a>
-                </div>
+            <div class="user-info__email">
+                <a href="#" class="link link_blue_yes">{{ userEmail }}</a>
             </div>
         </div>
-        <div class="user-info__logo user-logo">
-            <img src="https://pokemonletsgo.pokemon.com/assets/img/common/char-pikachu.png" height="200" width="250">
+        <div class="user-info__item">
+            <div class="user-info__company-info">
+                <a href="#" class="link link_blue_yes">Информация о компании</a>
+            </div>
+        </div>
+        <div class="user-info__item">
+            <div class="user-info__requisites">
+                <a href="#" class="link link_blue_yes">Показать реквизиты</a>
+            </div>
         </div>
     </div>
-    <hr>
-</header>
+    <div class="user-info__logo user-logo">
+        <img src="https://pokemonletsgo.pokemon.com/assets/img/common/char-pikachu.png" height="200" width="250">
+    </div>
+</div>
+<hr>

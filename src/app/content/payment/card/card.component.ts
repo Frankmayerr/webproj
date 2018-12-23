@@ -16,7 +16,7 @@ export class CardComponent implements OnInit {
       this.creditCardForm = formBuilder.group({
           'cvv': ['', [Validators.required, Validators.pattern('^[0-9]{3}$')]],
           'cardNumber': ['', [Validators.required, Validators.pattern('^[0-9]{16}$')]],
-          'summary': ['', [Validators.required, Validators.min(1000), Validators.max(75000)]],
+          'summary': ['', [Validators.required, Validators.min(1000), Validators.max(75000), Validators.pattern('^[0-9]*$')]],
           'comment': ['', [Validators.required, Validators.maxLength(150)]],
           'email': ['', [Validators.required, Validators.email]],
           'date': ['', [Validators.required, Validators.pattern('^[0-1][0-9]/[0-9]{4}$')]]

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../server.service';
-import { CompileShallowModuleMetadata } from '@angular/compiler';
 
 @Component({
   selector: 'app-admin',
@@ -39,7 +38,6 @@ export class AdminComponent implements OnInit {
 
 
   getcarddata() {
-    console.log('cardddd');
     this.Cards = new Array();
     this.serverService.getCardPayments()
     .subscribe(x => {
@@ -50,7 +48,6 @@ export class AdminComponent implements OnInit {
 
 
   getreqdata() {
-    console.log('reqqq');
     this.Requests = new Array();
     this.serverService.getRequests()
     .subscribe(x => {

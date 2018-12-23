@@ -13,7 +13,7 @@ input.ng-touched.ng-valid {
 }
 
 .form-group {
-    display: inline-flex;
+    display: flex;
 }
 
 div.card input {
@@ -23,7 +23,12 @@ div.card input {
 }
 
 div.other-block input {
-    margin: 9px;
+    margin: 10px;
+}
+
+input {
+    box-sizing: border-box;
+    position: relative;
 }
 
 input[name=cvv] {
@@ -31,7 +36,6 @@ input[name=cvv] {
 }
 
 label {
-    display: block;
     width: 200px;
 }
 
@@ -42,6 +46,7 @@ label {
     border-radius: 8px;
     box-shadow: -6px 3px 7px 1px rgba(0, 0, 0, .1), 0px 15px 20px rgba(0, 0, 0, .1), 6px 3px 20px rgba(0, 0, 0, .1);
     padding: 20px;
+    margin-bottom: 10px;
 }
 
 .form {
@@ -54,10 +59,6 @@ label {
 button:disabled {
     cursor: not-allowed;
     pointer-events: all !important;
-}
-
-.layout {
-    margin-top: 25px;
 }
 
 .other-block {
@@ -102,5 +103,20 @@ button:disabled {
     }
     .other-block {
         margin: 20px 0 0 10px;
+    }
+}
+
+@media screen and (max-width: 466px) {
+    .other-block {
+        width: 90%;
+    }
+    input {
+        width: 100%;
+    }
+    .card {
+        width: 100%;
+    }
+    .form-group {
+        display: inherit;
     }
 }

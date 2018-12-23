@@ -5,8 +5,8 @@
 
 .about-company {
     margin: auto;
-    margin-left: 10%;
-    margin-right: 10%;
+    margin-left: 5%;
+    margin-right: 5%;
     grid-template-areas: 'name' 'products' 'info';
     left: 50%;
     right: 50%;
@@ -18,27 +18,23 @@
 }
 
 .about-company-products {
-    display: flex;
+    margin-top: 30px;
     width: 100%;
-    justify-content: space-between;
+    display: flex;
+    justify-content: space-around;
+    flex-flow: row wrap;
 }
 
 .company-product {
-    width: 32%;
-    height: 370px;
-    border: 1px solid rgb(206, 206, 206);
+    width: 300px;
+    border: 1px solid #C1C1C1;
+    padding: 20px;
     box-sizing: border-box;
-    padding: 0 20px 20px 20px;
-    display: flex;
-    flex-wrap: wrap;
-    transition-property: all;
-    transition-duration: .4s;
-    background-color: white;
-    cursor: pointer;
+    margin-bottom: 30px;
 }
 
-.company-product:hover {
-    transform: scale(1.15);
+.company-product__img:hover {
+    transform: scale(1.1);
 }
 
 .intro-text {

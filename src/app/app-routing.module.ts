@@ -4,7 +4,7 @@ import { FormsModule, ReactiveFormsModule  } from '@angular/forms';
 import { AppComponent } from './app.component';
 const routes: Routes = [];
 
-@NgModule({ 
+@NgModule({
   imports: [RouterModule.forRoot(routes), FormsModule, ReactiveFormsModule ],
   exports: [RouterModule],
   bootstrap: [AppComponent]

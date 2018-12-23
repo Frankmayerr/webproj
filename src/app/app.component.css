@@ -13,6 +13,23 @@
     flex-flow: row wrap;
 }
 
+.container {
+    flex-flow: row wrap;
+    max-width: 100%;
+    margin: 10px;
+}
+
+.navbar-right,
+nav {
+    background-color: transparent;
+}
+
+input {
+    max-width: 220px;
+    width: 90%;
+    margin-bottom: 10px;
+}
+
 @media screen and (min-width: 1200px) {
     .general-layout {
         width: 80%;

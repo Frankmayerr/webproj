@@ -33,7 +33,7 @@ import { AdminComponent } from './admin/admin.component';
     ReactiveFormsModule,
     HttpModule,
   ],
-  providers: [ServerService],
+  providers: [ServerService, AdminComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,3 +1,43 @@
-<p>
-  payment-request works!
-</p>
+<div class="pay_header">
+    Создайте платёжку, а Швецова Мария Валерьевна подпишет её у себя в интернет-банке
+</div>
+<form [formGroup]="requestFieldForm" novalidate (ngSubmit)="submit()">
+    <div class="form-group inline-block">
+        <label>ИНН получателя</label>
+        <input type="text" class="form-control" name=sender formControlName="sender" placeholder="ИНН или название получателя">
+    </div>
+    <div class="form-group inline-block">
+        <label>БИК</label>
+        <input type="text" class="form-control" name=bik formControlName="bik" placeholder="9 цифр">
+    </div>
+    <div class="form-group inline-block">
+        <label>Номер счёта</label>
+        <input type="text" class="form-control" name=cardNumber formControlName="cardNumber" placeholder="20 цифр">
+    </div>
+    <div class="form-group inline-block">
+        <label>За что</label>
+        <div>
+            <div class="chose_nds__text">{{ NDS }}</div>
+            <div class="chose_nds">
+                <button type="button" (click)="getNDS('НДС 18%')">НДС 18%</button>
+                <button type="button" (click)="getNDS('НДС 10%')">НДС 10%</button>
+                <button type="button" (click)="getNDS('без НДС')">без НДС</button>
+            </div>
+        </div>
+    </div>
+    <div class="form-group inline-block">
+        <label>Сколько</label>
+        <input type="text" class="form-control" name=money formControlName="money" placeholder="от 1000 до 75000">
+    </div>
+    <div class="form-group inline-block">
+        <label>Номер телефона</label>
+        <input type="text" class="form-control" name=phone formControlName="phone" value="+7">
+    </div>
+    <div class="form-group">
+        <button type="submit" class="button" [disabled]="requestFieldForm.invalid">
+            <span class="button__text">Создать платёж</span>
+        </button>
+        <img src="https://tochka.com/theme/main/img/pay/tochka-pay.png" class="button_img" width="135px" height="60px">
+    </div>
+
+</form>

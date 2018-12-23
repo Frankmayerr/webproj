@@ -1,5 +1,28 @@
-<app-header></app-header>
-<hr>
-<td><hr></td>
-<app-content></app-content>
-<hr>
+<main class="general-layout">
+
+    <app-header></app-header>
+    <td>
+        <hr>
+    </td>
+    <input type="text" class="form-control" [(ngModel)]='login' placeholder="admin's login">
+    <input type="password" placeholder="admin's password" [(ngModel)]='passw' class="form-control" placeholder="password">
+
+    <div class="container">
+        <ul class="nav nav-pills navbar-right layout" role="tablist">
+            <li role="presentation"><a href="#cont" aria-controls="cont" role="tab" data-toggle="tab">Контент</a></li>
+            <li role="presentation" disabled><a [href]="checklogin() ? '#adm' : '#'" aria-controls="adm" role="tab" data-toggle="tab">Админ</a></li>
+        </ul>
+        <div class="tab-content">
+            <div role="tabpanel" class="tab-pane fade in active" id="cont">
+                <app-content></app-content>
+            </div>
+            <div role="tabpanel" class="tab-pane fade" id="adm">
+                <app-admin></app-admin>
+            </div>
+        </div>
+    </div>
+    <td>
+        <hr>
+    </td>
+    <app-footer></app-footer>
+</main>

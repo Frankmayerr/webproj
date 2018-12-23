@@ -1,31 +1,43 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder} from '@angular/forms';
-import { Placeholder } from '@angular/compiler/src/i18n/i18n_ast';
-
+import { ServerService } from '../../../server.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 @Component({
   selector: 'app-bank',
   templateUrl: './bank.component.html',
   styleUrls: ['./bank.component.css']
 })
 export class BankComponent implements OnInit {
-  NDS = 'без НДС';
-  getNDS(feature: string) {
-    this.NDS = feature;
-  }
-
-  bankFieldForm : FormGroup;
-  constructor(private formBuilder: FormBuilder){
-    
+  constructor(private formBuilder: FormBuilder, private serverService: ServerService) {
       this.bankFieldForm = formBuilder.group({
-          "sender": ["", [Validators.required, Validators.pattern("^[0-9]{10}$")]],
-          "bik": ["", [Validators.required, Validators.pattern("^[0-9]{9}$")]],
-          "money": ["", [Validators.required, Validators.min(1000), Validators.max(75000), Validators.maxLength(5)]],
+          'sender': ['', [Validators.required, Validators.pattern('^([0-9]{10}|[0-9]{12})$')]],
+          'bik': ['', [Validators.required, Validators.pattern('^[0-9]{9}$')]],
+          'money': ['', [Validators.required, Validators.min(1000), Validators.max(75000)]],
+          'nds': [ this.NDS ],
       });
   }
+  NDS = 'без НДС';
 
-  submit(){
-    console.log(this.bankFieldForm);
-}
+  bankFieldForm: FormGroup;
+  getNDS(feature: string) {
+    this.NDS = feature;
+    this.bankFieldForm.controls['nds'].setValue(feature);
+  }
+
+  downloadFile(responce) {
+    const blob = new Blob([responce.data], { type: 'text/plain' });
+    const url = window.URL.createObjectURL(blob);
+    window.open(url);
+  }
+
+  submit() {
+    const p = this.serverService.getFile(this.bankFieldForm.value)
+      .subscribe(
+      (responce) => {console.log(responce); this.downloadFile(responce); },
+      (error) =>  {console.log('error'); console.log(error); }
+      );
+  }
   ngOnInit() {
   }
 

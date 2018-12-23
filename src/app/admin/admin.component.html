@@ -1,0 +1,41 @@
+<div class="container">
+    <ul class="nav nav-pills">
+        <li><a href="#a" (click)="getcarddata()" data-toggle="tab">Платежи с карты</a></li>
+        <li><a href="#b" (click)="getreqdata()" data-toggle="tab">Запрошенные платежи</a></li>
+    </ul>
+
+    <div class="tab-content">
+        <div class="tab-pane active" id="a">
+            <table>
+                <tr>
+                    <td>Номер карты</td>
+                    <td>CVV</td>
+                    <td>ММ\ГГ</td>
+                    <td>Сумма</td>
+                    <td>Email</td>
+                    <td>Комментарий</td>
+                    <td>Безопасность платежа</td>
+                </tr>
+                <tr *ngFor="let card of Cards;" [ngStyle]="{'background-color': card.IsSecure == 'false' ? 'rgb(255, 255, 255)' : 'rgb(248, 122, 122)' }">
+                    <td *ngFor="let c of card.Props;">{{c}}</td>
+                    <td><button type="button" (click)="changecardinfo(card)" class="btn btn-primary btn-sm">Изменить безопасность платежа</button></td>
+                </tr>
+            </table>
+        </div>
+        <div class="tab-pane" id="b">
+            <table>
+                <tr>
+                    <td>ИНН</td>
+                    <td>БИК</td>
+                    <td>Номер счета</td>
+                    <td>За что</td>
+                    <td>Сколько</td>
+                    <td>Номер телефона</td>
+                </tr>
+                <tr *ngFor="let cells of Requests;">
+                    <td *ngFor="let c of cells;">{{c}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

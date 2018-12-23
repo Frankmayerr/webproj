@@ -9,6 +9,10 @@ import { CardComponent } from './content/payment/card/card.component';
 import { BankComponent } from './content/payment/bank/bank.component';
 import { PaymentRequestComponent } from './content/payment-request/payment-request.component';
 import { ContentComponent } from './content/content.component';
+import {ServerService} from './server.service';
+import {HttpModule} from '@angular/http';
+import { FooterComponent } from './footer/footer.component';
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -19,14 +23,17 @@ import { ContentComponent } from './content/content.component';
     BankComponent,
     PaymentRequestComponent,
     ContentComponent,
+    FooterComponent,
+    AdminComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpModule,
   ],
-  providers: [],
+  providers: [ServerService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

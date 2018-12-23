@@ -1,0 +1,94 @@
+input.ng-touched.ng-invalid {
+    border: solid red 2px;
+}
+
+input.ng-touched.ng-valid {
+    border: solid green 2px;
+}
+
+.pay_header {
+    font-size: 1.5em;
+    margin-top: 20px;
+    text-align: center;
+    color: rgb(133, 0, 173);
+    font-family: "Comic Sans MS";
+    margin-right: 25%;
+}
+
+.inline-block {
+    display: grid;
+    grid-gap: 10px;
+    grid-template-columns: [label] auto [input] 1fr;
+    margin: 30px;
+}
+
+input {
+    grid-column: input;
+    align-self: center;
+}
+
+label {
+    grid-column: label;
+    align-self: center;
+    width: 200px;
+}
+
+.button {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: absolute;
+    font-family: 'Comic Sans MS';
+    font-size: 25px;
+    text-align: center;
+    background: transparent;
+    color: blueviolet;
+    cursor: pointer;
+    border: 0;
+    z-index: 5;
+}
+
+.button_img {
+    height: 55px;
+}
+
+.chose_nds {
+    display: flex;
+}
+
+.chose_nds button,
+.clear-form-button {
+    -webkit-appearance: none;
+    background: transparent;
+    border: 0;
+    display: block;
+    color: #ae00ff;
+    font-family: 'Comic Sans MS';
+    font-weight: 500;
+    font-size: 16px;
+    margin-left: 5px;
+    margin-top: 12px;
+}
+
+.clear-form-button {
+    margin-left: 0;
+    font-size: 15px;
+    padding-left: 0;
+}
+
+.chose_nds button:hover,
+.clear-form-button:hover {
+    color: #ae00ff;
+}
+
+input {
+    grid-column: input;
+    width: 100%;
+    inline-size: 75%;
+    min-width: 200px;
+    box-sizing: border-box;
+}
+
+button:disabled {
+    cursor: not-allowed;
+    pointer-events: all !important;
+}

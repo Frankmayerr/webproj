@@ -1,0 +1,146 @@
+.header {
+    box-sizing: border-box;
+    margin: auto;
+    margin-left: 10%;
+    margin-right: 10%;
+}
+
+.user-info {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 40px 45px 40px 45px;
+}
+
+.user-info__text {
+    display: flex;
+    flex-flow: column nowrap;
+    box-sizing: border-box;
+    width: 60%;
+}
+
+.user-info__logo {
+    width: 40%;
+}
+
+.user-info__title {
+    font-weight: 700;
+    font-size: 25px;
+    line-height: 1.2em;
+    padding-bottom: 14px;
+}
+
+.user-info__item {
+    display: flex;
+    flex-flow: row wrap;
+    font-weight: 500;
+    margin-bottom: 5px;
+}
+
+.user-info__item div {
+    margin-right: 20px;
+}
+
+.user-info__phone {
+    color: grey;
+}
+
+.user-info__requisites {
+    margin-top: 10px;
+}
+
+.user-info__logo {
+    width: calc(40% - 90px);
+}
+
+.user-logo img {
+    position: relative;
+    bottom: -10px;
+    right: -30px;
+}
+
+.link {
+    text-decoration: none;
+    outline: none;
+    transition: color .15s ease-out;
+    cursor: pointer;
+    display: block;
+}
+
+.link_blue_yes,
+.link_blue_yes:visited {
+    color: #0c75c4;
+}
+
+.link_blue_yes:hover {
+    color: #708DF6;
+}
+
+hr {
+    margin: 0 45px;
+}
+
+@media screen and (min-width: 861px) and (max-width: 950px) {
+    .user-logo img {
+        bottom: -10px;
+        right: 30px;
+    }
+}
+
+@media screen and (max-width: 1101px) and (min-width: 1200px) {
+    .user-logo img {
+        height: 130px;
+        width: auto;
+        bottom: 0;
+        right: -100px;
+    }
+}
+
+@media screen and (max-width: 860px) {
+    .user-logo img {
+        bottom: -35px;
+        right: 30px;
+    }
+}
+
+@media screen and (max-width: 820px) {
+    .user-logo img {
+        bottom: -35px;
+        right: 40px;
+    }
+}
+
+@media screen and (max-width: 774px) {
+    .user-logo img {
+        bottom: -50px;
+        right: 60px;
+    }
+}
+
+@media screen and (max-width: 680px) {
+    .user-logo img {
+        bottom: -50px;
+        right: 110px;
+    }
+}
+
+@media screen and (max-width: 580px) {
+    .user-info {
+        flex-flow: column wrap;
+        width: 100%;
+        margin: auto;
+    }
+    .user-info__logo {
+        width: 100%;
+        text-align: center;
+        margin-top: 40px;
+    }
+    .user-info__text {
+        width: 100%;
+    }
+    .user-logo img {
+        position: static;
+    }
+}

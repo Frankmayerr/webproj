@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder} from '@angular/forms';
-import { ServerService } from '../../../server.service';
+import { ServerService } from '../../../../server.service';
 
 @Component({
   selector: 'app-card',
@@ -25,7 +25,7 @@ export class CardComponent implements OnInit {
 
   submit() {
     const value_to_send = this.creditCardForm.value;
-    value_to_send['isSecure'] = true;
+    value_to_send['IsSecure'] = true;
     this.serverService.storeCardPayments(value_to_send)
     .subscribe(
       (responce) => {console.log('success'); console.log(responce); },

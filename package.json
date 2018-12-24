@@ -24,6 +24,7 @@
     "angular": "^1.7.5",
     "bootstrap": "^3.3.7",
     "core-js": "^2.5.4",
+    "firebase": "^5.7.1",
     "jquery": "^3.3.1",
     "ng-ajax": "^0.1.2",
     "query": "^0.2.0",

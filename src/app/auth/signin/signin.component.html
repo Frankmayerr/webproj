@@ -1,0 +1,20 @@
+<div class="layout">
+    <div class="login">Вход в банк</div>
+    <div *ngIf="authService.incorrect" style="color: red">Некорректные данные</div>
+    <form (ngSubmit)="onSignin(f)" #f="ngForm" class="form">
+        <div class="form__group">
+            <label for="email">E-mail</label>
+            <input type="email" id="email" name="email" ngModel required>
+        </div>
+        <div class="form__group">
+            <label for="password">Пароль</label>
+            <input type="password" id="password" name="password" ngModel required>
+        </div>
+        <div class="button_form">
+            <button class="button" type="submit" [disabled]="!f.valid">
+                <span class="button__text">Войти</span>
+            </button>
+            <img src="https://tochka.com/theme/main/img/pay/tochka-pay.png" class="button_img" width="110px" height="65px">
+        </div>
+    </form>
+</div>

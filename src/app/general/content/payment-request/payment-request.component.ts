@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, Validators, FormBuilder} from '@angular/forms';
-import { ServerService } from '../../server.service';
+import { ServerService } from '../../../server.service';
 
 @Component({
   selector: 'app-payment-request',

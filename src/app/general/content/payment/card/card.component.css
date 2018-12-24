@@ -27,12 +27,16 @@ div.other-block input {
 }
 
 input {
+    margin-top: -10px;
     box-sizing: border-box;
-    position: relative;
 }
 
 input[name=cvv] {
     width: 75%;
+}
+
+input[name=date] {
+    width: 88%;
 }
 
 label {
@@ -110,7 +114,9 @@ button:disabled {
     .other-block {
         width: 90%;
     }
-    input {
+    input,
+    input[name=cvv],
+    input[name=date] {
         width: 100%;
     }
     .card {

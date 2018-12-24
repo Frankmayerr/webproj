@@ -25,6 +25,7 @@ export class PaymentRequestComponent implements OnInit {
 
   getNDS(feature: string) {
     this.NDS = feature;
+    this.requestFieldForm.controls['nds'].setValue(feature);
   }
 
   submit() {

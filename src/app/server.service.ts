@@ -47,4 +47,29 @@ export class ServerService {
         return this.http.patch('http://localhost:8000/changeSecurity', {'id': id}, {headers: this.headersToSend});
     }
 
+    sorttable(field) {
+        console.log('sortcard');
+        console.log(field);
+        return this.http.patch('http://localhost:8000/sortcards', {'name' : field}, {headers: this.headersToSend})
+        .pipe(map(r => r.json()));
+    }
+
+    sortreq(field) {
+        console.log('sortreq');
+        console.log(field);
+        return this.http.patch('http://localhost:8000/sortreq', {'name' : field}, {headers: this.headersToSend})
+        .pipe(map(r => r.json()));
+    }
+
+    filtercard(column, value) {
+        console.log('filter card!');
+        return this.http.patch('http://localhost:8000/filtercard', {'column': column, 'value': value}, {headers: this.headersToSend})
+        .pipe(map(r => r.json()));
+    }
+
+    filterreq(column, value) {
+        console.log('filter req!');
+        return this.http.patch('http://localhost:8000/filterreq', {'column': column, 'value': value}, {headers: this.headersToSend})
+        .pipe(map(r => r.json()));
+    }
 }

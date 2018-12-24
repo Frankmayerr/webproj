@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ServerService } from '../server.service';
-
+import { FormGroup, Validators, FormBuilder} from '@angular/forms';
 @Component({
   selector: 'app-admin',
   templateUrl: './admin.component.html',
@@ -8,7 +8,19 @@ import { ServerService } from '../server.service';
 })
 
 export class AdminComponent implements OnInit {
-  constructor(private serverService: ServerService) { }
+  CardForm: FormGroup;
+  ReqForm: FormGroup;
+
+  constructor(private formBuilder: FormBuilder, private serverService: ServerService) {
+    this.CardForm = formBuilder.group({
+      'column': ['', [Validators.required]],
+      'value' : ['', [Validators.required]],
+  });
+  this.ReqForm = formBuilder.group({
+    'column': ['', [Validators.required]],
+    'value' : ['', [Validators.required]],
+  });
+  }
 
   Cards: Array<Card>;
   Requests: Array<any>;
@@ -76,6 +88,48 @@ export class AdminComponent implements OnInit {
       if (a[i] !== b[i]) { return false; }
     }
     return true;
+  }
+
+  sorttable(field) {
+    this.Cards = new Array();
+     this.serverService.sorttable(field)
+     .subscribe(x => { Object.keys(x).forEach(p => this.Cards.push(this.handle_card_json(x[p]))); }
+     , err => console.log(err));
+  }
+
+  sortreq(field) {
+    this.Requests = new Array();
+     this.serverService.sortreq(field)
+     .subscribe(x => { Object.keys(x).forEach(p => this.Requests.push(this.handle_request_json(x[p]))); }
+     , err => console.log(err));
+  }
+
+  reqsubmit() {
+    this.Requests = new Array();
+    this.serverService.filterreq(this.ReqForm.value['column'], this.ReqForm.value['value'])
+    .subscribe(x => { Object.keys(x).forEach(p => this.Requests.push(this.handle_request_json(x[p]))); }
+     , err => console.log(err));
+  }
+
+  cardsubmit() {
+    this.Cards = new Array();
+    this.serverService.filtercard(this.CardForm.value['column'], this.CardForm.value['value'])
+    .subscribe(x => { Object.keys(x).forEach(p => this.Cards.push(this.handle_card_json(x[p]))); }
+     , err => console.log(err));
+  }
+
+  choosecardfilter(column) {
+    this.CardForm.value['column'] = column;
+  }
+  choosecardvalue(value) {
+    this.CardForm.value['value'] = value;
+  }
+
+  choosereqfilter(column) {
+    this.ReqForm.value['column'] = column;
+  }
+  choosereqvalue(value) {
+    this.ReqForm.value['value'] = value;
   }
 }
 

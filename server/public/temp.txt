@@ -1,1 +1,1 @@
-new file blablablabalbalab
+{"sender":"1234567890","bik":"000999888","money":"2223","nds":"НДС 18%"}

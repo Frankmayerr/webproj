@@ -1,48 +1,113 @@
-<div class="container">
-    <ul class="nav nav-pills">
-        <li><a href="#a" (click)="getcarddata()" data-toggle="tab">Платежи с карты</a></li>
-        <li><a href="#b" (click)="getreqdata()" data-toggle="tab">Запрошенные платежи</a></li>
-    </ul>
+<main class="general-layout layout">
+    <div class="container">
+        <ul class="nav nav-pills">
+            <li><a href="#a" (click)="getcarddata()" data-toggle="tab">Платежи с карты</a></li>
+            <li><a href="#b" (click)="getreqdata()" data-toggle="tab">Запрошенные платежи</a></li>
+        </ul>
 
-    <div class="tab-content">
-        <div class="tab-pane active" id="a">
-            <table>
-                <div *ngIf="Cards !== undefined && Cards.length>0; then thenBlock else elseBlock"></div>
-                <ng-template #thenBlock>
-                    <tr>
-                        <td>Номер карты</td>
-                        <td>CVV</td>
-                        <td>ММ\ГГ</td>
-                        <td>Сумма</td>
-                        <td>Email</td>
-                        <td>Комментарий</td>
-                        <td>Безопасность платежа</td>
-                    </tr>
-                </ng-template>
-                <ng-template #elseBlock>
-                    <img src="https://memepedia.ru/wp-content/uploads/2018/10/pikachu-mem-hd.jpg" width="500px" height="500px">
-                </ng-template>
+        <div class="tab-content">
+            <div class="tab-pane active" id="a">
+                <form class="form layout" [formGroup]="CardForm" novalidate (ngSubmit)="cardsubmit()">
+                    <table>
+                        <div *ngIf="Cards !== undefined && Cards.length>0; then thenBlock else elseBlock"></div>
+                        <ng-template #thenBlock>
+                            <tr>
+                                <td (click)="choosecardfilter('cardNumber')">Номер карты
+                                    <button type="button" class="btn btn-default btn-xs" (click)="sorttable('cardNumber')">
+                                <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                            </button>
+                                </td>
+                                <td (click)="choosecardfilter('comment')">Комментарий
+                                    <button type="button" class="btn btn-default btn-xs" (click)="sorttable('comment')">
+                                        <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                    </button>
+                                </td>
+                                <td (click)="choosecardfilter('cvv')">CVV
+                                    <button type="button" class="btn btn-default btn-xs" (click)="sorttable('cvv')">
+                                        <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                    </button>
+                                </td>
+                                <td (click)="choosecardfilter('date')">ММ\ГГ
+                                    <button type="button" class="btn btn-default btn-xs" (click)="sorttable('date')">
+                                        <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                    </button>
+                                </td>
+                                <td (click)="choosecardfilter('email')">Email
+                                    <button type="button" class="btn btn-default btn-xs" (click)="sorttable('email')">
+                                        <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                    </button>
+                                </td>
+                                <td (click)="choosecardfilter('sum')">Сумма
+                                    <button type="button" class="btn btn-default btn-xs" (click)="sorttable('sum')">
+                                        <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                    </button>
+                                </td>
+                                <td>Безопасность платежа</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template #elseBlock>
+                            <img src="https://memepedia.ru/wp-content/uploads/2018/10/pikachu-mem-hd.jpg" width="500px" height="500px">
+                        </ng-template>
 
-                <tr *ngFor="let card of Cards;" [ngStyle]="{'background-color': card.IsSecure == 'false' ? 'rgb(255, 255, 255)' : 'rgb(248, 122, 122)' }">
-                    <td *ngFor="let c of card.Props;">{{c}}</td>
-                    <td><button type="button" (click)="changecardinfo(card)" class="btn btn-primary btn-sm">Изменить безопасность платежа</button></td>
-                </tr>
-            </table>
-        </div>
-        <div class="tab-pane" id="b">
-            <table>
-                <tr>
-                    <td>БИК</td>
-                    <td>ИНН</td>
-                    <td>Сколько</td>
-                    <td>Номер счета</td>
-                    <td>Номер телефона</td>
-                    <td>За что</td>
-                </tr>
-                <tr *ngFor="let cells of Requests;">
-                    <td *ngFor="let c of cells;">{{c}}</td>
-                </tr>
-            </table>
+                        <tr *ngFor="let card of Cards;" [ngStyle]="{'background-color': card.IsSecure == 'false' ? 'rgb(255, 255, 255)' : 'rgb(248, 122, 122)' }">
+                            <td *ngFor="let c of card.Props;" (click)="choosecardvalue(c)">{{c}}</td>
+                            <td><button type="button" (click)="changecardinfo(card)" class="btn btn-primary btn-sm">Изменить безопасность платежа</button></td>
+                        </tr>
+                    </table>
+                    <input type="text" class="form-control" [(ngModel)]="CardForm.value['column']" name=column formControlName="column" placeholder="Имя колонки для фильтра">
+                    <input type="text" class="form-control" [(ngModel)]="CardForm.value['value']" name=value formControlName="value" placeholder="Значение фильтрации">
+                    <button type="submit" class="button btn btn-info" [disabled]="CardForm.invalid">
+                        <span class="button__text">Фильтровать</span>
+                </button>
+                </form>
+            </div>
+
+            <div class="tab-pane" id="b">
+                <form class="form layout" [formGroup]="ReqForm" novalidate (ngSubmit)="reqsubmit()">
+                    <table>
+                        <tr>
+                            <td (click)="choosereqfilter('bik')">БИК
+                                <button type="button" class="btn btn-default btn-xs" (click)="sortreq('bik')">
+                            <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                        </button>
+                            </td>
+                            <td (click)="choosereqfilter('cardNumber')">Номер счета
+                                <button type="button" class="btn btn-default btn-xs" (click)="sortreq('cardNumber')">
+                                    <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                </button>
+                            </td>
+                            <td (click)="choosereqfilter('money')">Сколько
+                                <button type="button" class="btn btn-default btn-xs" (click)="sortreq('money')">
+                                    <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                </button>
+                            </td>
+                            <td (click)="choosereqfilter('nds')">За что
+                                <button type="button" class="btn btn-default btn-xs" (click)="sortreq('nds')">
+                                    <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                </button>
+                            </td>
+                            <td (click)="choosereqfilter('phone')">Номер телефона
+                                <button type="button" class="btn btn-default btn-xs" (click)="sortreq('phone')">
+                                    <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                </button>
+                            </td>
+                            <td (click)="choosereqfilter('sender')">ИНН
+                                <button type="button" class="btn btn-default btn-xs" (click)="sortreq('sender')">
+                                    <img src="https://cdn4.iconfinder.com/data/icons/sibcode-line-simple/512/down-512.png" height="15px" width="15px">
+                                </button>
+                            </td>
+                        </tr>
+                        <tr *ngFor="let cells of Requests;">
+                            <td *ngFor="let c of cells;" (click)="choosereqvalue(c)">{{c}}</td>
+                        </tr>
+                    </table>
+                    <input type="text" class="form-control" [(ngModel)]="ReqForm.value['column']" name=column formControlName="column" placeholder="Имя колонки для фильтра">
+                    <input type="text" class="form-control" [(ngModel)]="ReqForm.value['value']" name=value formControlName="value" placeholder="Значение фильтрации">
+                    <button type="submit" class="button btn btn-info" [disabled]="ReqForm.invalid">
+                        <span class="button__text">Фильтровать</span>
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
-</div>
+</main>

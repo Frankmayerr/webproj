@@ -25,7 +25,8 @@ export class BankComponent implements OnInit {
   }
 
   downloadFile(responce) {
-    const blob = new Blob([responce.data], { type: 'text/plain' });
+    console.log(responce);
+    const blob = new Blob([JSON.stringify(responce.json())], { type: 'text/plain;charset=utf8' });
     const url = window.URL.createObjectURL(blob);
     window.open(url);
   }

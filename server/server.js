@@ -34,6 +34,67 @@ app.all('*', function(req, res, next) {
     next();
 });
 
+function dynamicSort(property) {
+    var sortOrder = 1;
+    if (property[0] === "-") {
+        sortOrder = -1;
+        property = property.substr(1);
+    }
+    return function(a, b) {
+        var result = (a[property] < b[property]) ? -1 : (a[property] > b[property]) ? 1 : 0;
+        return result * sortOrder;
+    }
+}
+
+app.patch('/sortcards', function(req, res) {
+    var result = {};
+    console.log("sortcards!")
+    var count = 0;
+    db.ref('/webproj/cardPayments').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            let val = childSnapshot.val();
+            result[count] = val;
+            count++;
+        });
+        console.log(result);
+        var arr = Object.keys(result).map(function(k) { return result[k] });
+        arr = arr.sort(dynamicSort(req.body["name"]))
+        count = 0;
+        result = {};
+        arr.forEach(function(x) {
+            result[count] = x;
+            count++;
+        })
+        if (!res.headersSent)
+            return res.send(result).end();
+    });
+})
+
+app.patch('/sortreq', function(req, res) {
+    var result = {};
+    console.log("sortreqs!")
+    var count = 0;
+    db.ref('/webproj/requests').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            let val = childSnapshot.val();
+            result[count] = val;
+            count++;
+        });
+        console.log(result);
+        var arr = Object.keys(result).map(function(k) { return result[k] });
+        arr = arr.sort(dynamicSort(req.body["name"]))
+        count = 0;
+        result = {};
+        arr.forEach(function(x) {
+            result[count] = x;
+            count++;
+        })
+        if (!res.headersSent)
+            return res.send(result).end();
+    });
+})
+
+
 app.get('/cardPayments', function(req, res) {
     var result = {};
     console.log("getcards!")
@@ -72,11 +133,9 @@ app.patch('/changeSecurity', function(req, res) {
     ref.child('cardPayments').orderByChild('id').equalTo(id).once("value", function(snapshot) {
         let count = 0;
         snapshot.forEach(function(childSnapshot) {
-            console.log(count);
             count += 1;
             let obj = childSnapshot.val();
             let newSecurity = 'false';
-            console.log(obj);
             if (obj.IsSecure === 'false')
                 newSecurity = 'true';
             childSnapshot.ref.update({ IsSecure: newSecurity },
@@ -96,7 +155,8 @@ var options = {
 
 app.post('/getFile', function(req, res) {
     console.log("getFile!");
-    fs.writeFileSync("./public/temp.txt", "new file blablablabalbalab");
+    console.log(req.body);
+    fs.writeFileSync("./public/temp.txt", JSON.stringify(req.body));
     return res.sendFile('temp.txt', options, function(err) {
         if (err) {
             console.log(err);
@@ -142,3 +202,41 @@ app.post('/storeRequests', function(req, res) {
     if (!res.headersSent)
         return res.sendStatus(200).end();
 });
+
+app.patch('/filtercard', function(req, res) {
+    var result = {};
+    console.log("filtercards!")
+    var count = 0;
+    console.log(req.body)
+    db.ref('/webproj/cardPayments').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            let val = childSnapshot.val();
+            console.log(val);
+            if (val[req.body['column']] === req.body['value']) {
+                result[count] = val;
+                count++;
+            }
+        });
+        console.log(result);
+        if (!res.headersSent)
+            return res.send(result).end();
+    });
+})
+
+app.patch('/filterreq', function(req, res) {
+    var result = {};
+    console.log("filterreqs!")
+    var count = 0;
+    db.ref('/webproj/requests').on('value', function(snapshot) {
+        snapshot.forEach(function(childSnapshot) {
+            let val = childSnapshot.val();
+            if (val[req.body['column']] === req.body['value']) {
+                result[count] = val;
+                count++;
+            }
+        });
+        console.log(result);
+        if (!res.headersSent)
+            return res.send(result).end();
+    });
+})
